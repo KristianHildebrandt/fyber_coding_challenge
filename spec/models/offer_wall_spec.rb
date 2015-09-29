@@ -7,4 +7,5 @@ describe OfferWall do
 
   it { is_expected.to validate_presence_of(:uid) }
   it { is_expected.to validate_numericality_of(:page).only_integer }
+  it { should allow_value("", nil).for(:page) }
 end
