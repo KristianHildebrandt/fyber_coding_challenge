@@ -1,4 +1,13 @@
 class OfferWallController < ApplicationController
-  def form
+  before_filter do
+    @form = OfferWall.new(params[:offer_wall])
+  end
+
+  def list
+    if @form.valid?
+      render 'list'
+    else
+      render 'form'
+    end
   end
 end
