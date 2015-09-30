@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "fyber"
+
+
+require 'pry'
+
+require 'dotenv'
+Dotenv.load
+
+Fyber.configure do |c|
+  c.format = "json"
+  c.device_id = "device_id"
+  c.locale = "de"
+  c.offer_types = "123"
+  c.app_id = "app_id"
+  c.api_key = ENV['API_KEY']
+end
+
+Pry.start binding
