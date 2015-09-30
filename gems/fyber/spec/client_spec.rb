@@ -8,7 +8,7 @@ module Fyber
           {
             format: 'json',
             appid: 157,
-            locale: 'en',
+            locale: 'de',
             os_version: '7.0',
             timestamp: Time.now.to_i,
             apple_idfa: '2b6f0cc904d137be2e1730235f5664094b83',
@@ -21,7 +21,7 @@ module Fyber
         let(:response) do
           VCR.use_cassette("offer_wall") do |cassette|
             Timecop.freeze(cassette.originally_recorded_at || Time.now) do
-              return Client.offer_wall(params.merge({"page" => '', "pub0" => "", "uid" => "player1"}))
+              return Client.offer_wall(params.merge({"uid" => "player1", "page" => '', "pub0" => ""}))
             end
           end
         end

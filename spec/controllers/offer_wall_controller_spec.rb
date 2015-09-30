@@ -20,13 +20,23 @@ describe OfferWallController do
 
   describe "list" do
     context "search valid" do
+      let(:params) {{ offer_wall: { "page" => "", "pub0" => "", "uid" => "player1"}} }
+      let(:api_options) { OfferWallController::OFFERWALL_OPTIONS.merge(params[:offer_wall]) }
+      let(:api_response) { double }
+
       before(:each) do
         allow_any_instance_of(OfferWall).to receive(:valid?).and_return(true)
-        post :list
+        allow(Fyber::Client).to receive(:offer_wall).with(api_options).and_return(api_response)
+
+        post :list, params
       end
 
       it "renders the list-template" do
         expect(response).to render_template(:list)
+      end
+
+      it "gets the offers from the api" do
+        expect(assigns(:offers)).to eq(api_response)
       end
     end
 
