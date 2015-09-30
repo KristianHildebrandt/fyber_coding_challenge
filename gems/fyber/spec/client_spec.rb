@@ -17,7 +17,7 @@ module Fyber
                 apple_idfa: '2b6f0cc904d137be2e1730235f5664094b83',
                 apple_idfa_tracking_enabled: true,
                 ip: '109.235.143.113',
-                offer_types: (100..113).map(&:to_s).join(",")
+                offer_types: 112
               }
               return Client.offer_wall(params)
             end
