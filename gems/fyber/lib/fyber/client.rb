@@ -9,7 +9,7 @@ module Fyber
 
     class << self
       def offer_wall(options = {})
-        request_params = options.merge(hashkey: calculate_hash(options))
+        request_params = cleaned(options).merge(hashkey: calculate_hash(options))
 
         get('/feed/v1/offers.json', query: request_params)
       end
@@ -25,7 +25,15 @@ module Fyber
       end
 
       def sorted_options(options)
-        options.sort_by{|k,v| k}
+        stringified(options).sort_by{|k,v| k }
+      end
+
+      def stringified(options)
+        options.map{|k,v| [k.to_s, v.to_s]}
+      end
+
+      def cleaned(options)
+        options.delete_if{|k,v| v == nil || v == ""}
       end
     end
   end
