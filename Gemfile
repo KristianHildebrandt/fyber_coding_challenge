@@ -26,6 +26,7 @@ gem "simple_form"
 gem "title"
 gem "uglifier"
 gem 'haml-rails'
+gem 'fyber', path: 'gems/fyber'
 
 group :development do
   gem "spring"
