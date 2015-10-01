@@ -1,64 +1,80 @@
 ---
 - hosts: all
 
+  vars:
+    app_dir: /home/app/fyber_code_challenge
+
   tasks:
-  - user: name=app createhome="yes" shell=/bin/bash
+  #- user: name=app createhome="yes" shell=/bin/bash
 
-  - name: Placing key
-    authorized_key: user=app key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  #- name: Placing key
+    #authorized_key: user=app key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
-  - name: update package lists
-    apt: update_cache=yes
+  #- name: update package lists
+    #apt: update_cache=yes
 
-  - name: install dependencies
-    apt: pkg={{ item }}
-    with_items:
-      - git-core
-      - curl
-      - zlib1g-dev
-      - build-essential
-      - libssl-dev
-      - libreadline-dev
-      - libyaml-dev
-      - libsqlite3-dev
-      - sqlite3
-      - libxml2-dev
-      - libxslt1-dev
-      - libcurl4-openssl-dev
-      - python-software-properties
-      - libffi-dev
-      - libgdbm-dev
-      - libncurses5-dev
-      - automake
-      - libtool
-      - bison
-      - libffi-dev
-      - libicu-dev
-      - libpq-dev
-      - postgresql-client-9.3
-      - htop
-      - unzip
-      - libwww-perl
-      - libdatetime-perl
+  #- name: install dependencies
+    #apt: pkg={{ item }}
+    #with_items:
+      #- git-core
+      #- curl
+      #- zlib1g-dev
+      #- build-essential
+      #- libssl-dev
+      #- libreadline-dev
+      #- libyaml-dev
+      #- libsqlite3-dev
+      #- sqlite3
+      #- libxml2-dev
+      #- libxslt1-dev
+      #- libcurl4-openssl-dev
+      #- python-software-properties
+      #- libffi-dev
+      #- libgdbm-dev
+      #- libncurses5-dev
+      #- automake
+      #- libtool
+      #- bison
+      #- libffi-dev
+      #- libicu-dev
+      #- libpq-dev
+      #- postgresql-client-9.3
+      #- htop
+      #- unzip
+      #- libwww-perl
+      #- libdatetime-perl
 
-  - name: Create ssh config file
-    file:
-      path: '/home/app/.ssh/config'
-      owner: 'app'
-      state: 'touch'
-      mode: '0644'
+  #- name: Create ssh config file
+    #file:
+      #path: '/home/app/.ssh/config'
+      #owner: 'app'
+      #state: 'touch'
+      #mode: '0644'
 
-  - name: Set StrictHostKeyChecking
-    lineinfile:
-      dest: '/home/app/.ssh/config'
-      line: '{{ item }}'
-    with_items:
-     - 'Host bitbucket.org'
-     - ' StrictHostKeyChecking no'
+  #- name: Set StrictHostKeyChecking
+    #lineinfile:
+      #dest: '/home/app/.ssh/config'
+      #line: '{{ item }}'
+    #with_items:
+     #- 'Host bitbucket.org'
+     #- ' StrictHostKeyChecking no'
 
-  roles:
-    - role: rvm_io.rvm1-ruby
-      tags: ruby
-      sudo: True
-      rvm1_rubies:
-          - 'ruby-2.2.3'
+  - name: Install nginx web server
+    apt:
+      pkg: nginx
+      state: installed
+      update_cache: true
+
+  - name: Copy nginx configuration to /etc/nginx
+    template:
+      src: '../files/default_virtual_host'
+      dest: '/etc/nginx/sites-available/default'
+    notify:
+      - restart nginx
+
+  #roles:
+    #- role: rvm_io.rvm1-ruby
+      #tags: ruby
+      #sudo: True
+      #rvm1_rubies:
+          #- 'ruby-2.2.3'
