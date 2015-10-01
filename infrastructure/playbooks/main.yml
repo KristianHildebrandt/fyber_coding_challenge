@@ -1,0 +1,49 @@
+---
+- hosts: all
+
+  tasks:
+  - user: name=app createhome="yes"
+
+  - name: Placing key
+    authorized_key: user=app key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}" shell=/bin/bash
+
+  - name: update package lists
+    apt: update_cache=yes
+
+  - name: install dependencies
+    apt: pkg={{ item }}
+    with_items:
+      - git-core
+      - curl
+      - zlib1g-dev
+      - build-essential
+      - libssl-dev
+      - libreadline-dev
+      - libyaml-dev
+      - libsqlite3-dev
+      - sqlite3
+      - libxml2-dev
+      - libxslt1-dev
+      - libcurl4-openssl-dev
+      - python-software-properties
+      - libffi-dev
+      - libgdbm-dev
+      - libncurses5-dev
+      - automake
+      - libtool
+      - bison
+      - libffi-dev
+      - libicu-dev
+      - libpq-dev
+      - postgresql-client-9.3
+      - htop
+      - unzip
+      - libwww-perl
+      - libdatetime-perl
+
+  roles:
+    - role: rvm_io.rvm1-ruby
+      tags: ruby
+      sudo: True
+      rvm1_rubies:
+          - 'ruby-2.2.3'
