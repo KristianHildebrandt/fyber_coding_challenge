@@ -6,7 +6,7 @@ gem "airbrake"
 gem "autoprefixer-rails"
 gem "bourbon", "~> 4.2.0"
 gem "coffee-rails", "~> 4.1.0"
-gem "delayed_job_active_record"
+#gem "delayed_job_active_record"
 gem "email_validator"
 gem "flutie"
 gem "high_voltage"
@@ -49,7 +49,6 @@ end
 
 group :test do
   gem "capybara-webkit", ">= 1.2.0"
-  gem "database_cleaner"
   gem "formulaic"
   gem "launchy"
   gem "shoulda-matchers", require: false

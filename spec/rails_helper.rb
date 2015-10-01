@@ -1,7 +1,7 @@
 ENV["RAILS_ENV"] = "test"
 
 require File.expand_path("../../config/environment", __FILE__)
-abort("DATABASE_URL environment variable is set") if ENV["DATABASE_URL"]
+#abort("DATABASE_URL environment variable is set") if ENV["DATABASE_URL"]
 
 require "rspec/rails"
 require "shoulda/matchers"
@@ -20,5 +20,5 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 end
 
-ActiveRecord::Migration.maintain_test_schema!
+#ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :webkit
