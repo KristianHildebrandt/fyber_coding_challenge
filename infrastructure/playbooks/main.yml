@@ -2,10 +2,10 @@
 - hosts: all
 
   tasks:
-  - user: name=app createhome="yes"
+  - user: name=app createhome="yes" shell=/bin/bash
 
   - name: Placing key
-    authorized_key: user=app key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}" shell=/bin/bash
+    authorized_key: user=app key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
   - name: update package lists
     apt: update_cache=yes
@@ -40,6 +40,21 @@
       - unzip
       - libwww-perl
       - libdatetime-perl
+
+  - name: Create ssh config file
+    file:
+      path: '/home/app/.ssh/config'
+      owner: 'app'
+      state: 'touch'
+      mode: '0644'
+
+  - name: Set StrictHostKeyChecking
+    lineinfile:
+      dest: '/home/app/.ssh/config'
+      line: '{{ item }}'
+    with_items:
+     - 'Host bitbucket.org'
+     - ' StrictHostKeyChecking no'
 
   roles:
     - role: rvm_io.rvm1-ruby

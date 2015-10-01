@@ -27,6 +27,7 @@ gem "title"
 gem "uglifier"
 gem 'haml-rails'
 gem 'fyber', path: 'gems/fyber'
+gem 'mina'
 
 group :development do
   gem "spring"
@@ -60,3 +61,6 @@ end
 group :staging, :production do
   gem "rack-timeout"
 end
+
+gem "therubyracer"
+gem 'mina-puma', require: false
