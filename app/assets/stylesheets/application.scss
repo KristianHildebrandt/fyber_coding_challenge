@@ -11,7 +11,7 @@ section {
   @include outer-container;
 }
 
-h1, p {
+.intro {
   text-align: center
 }
 
@@ -21,10 +21,18 @@ h1, p {
   position: absolute;
   top: 50%;
   left: 50%;
+  text-align: left;
 
-  animation: bounceIn 2s;
-
-  label {
+  label, span, .input {
     text-align: left;
+  }
+}
+
+#offer-list {
+  margin-top: 25px;
+
+  .card img {
+    float: left;
+    margin-right: 8px;
   }
 }

@@ -1,1 +1,8 @@
-= @offers
+.cards#offer-list
+  - @offers['offers'].each do |offer|
+    .card
+      .card-header
+        = offer["title"]
+      .card-copy
+        %img{:alt => "", :src => offer["thumbnail"]["lowres"]}/
+        %p= offer['teaser']
