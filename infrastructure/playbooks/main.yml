@@ -69,8 +69,6 @@
     template:
       src: '../files/default_virtual_host'
       dest: '/etc/nginx/sites-available/default'
-    notify:
-      - restart nginx
 
   - name: Set environment variables
     lineinfile:
