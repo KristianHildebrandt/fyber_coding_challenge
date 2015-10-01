@@ -1,8 +1,16 @@
-.cards#offer-list
-  - @offers['offers'].each do |offer|
-    .card
-      .card-header
-        = offer["title"]
-      .card-copy
-        %img{:alt => "", :src => offer["thumbnail"]["lowres"]}/
-        %p= offer['teaser']
+#offer-list
+  = link_to "Go Back", root_path, id: 'back-button'
+
+  - if @offers['offers'].present?
+    .cards
+      - @offers['offers'].each do |offer|
+        .card
+          .card-header
+            = offer["title"]
+          .card-copy
+            %img{:alt => "", :src => offer["thumbnail"]["lowres"]}/
+            %p= offer['teaser']
+  -else
+    #empty-list
+      %h1 Sorry!
+      %p Unfortunately we did not find anything. Please try again.

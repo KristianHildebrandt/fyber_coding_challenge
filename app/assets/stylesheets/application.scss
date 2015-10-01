@@ -15,12 +15,16 @@ section {
   text-align: center
 }
 
-.form-wrapper {
-  @include span-columns(4);
-  @include transform( translate(-50%,-50%) );
+@mixin vertical-center {
   position: absolute;
   top: 50%;
   left: 50%;
+  @include transform( translate(-50%,-50%) );
+}
+
+.form-wrapper {
+  @include span-columns(4);
+  @include vertical-center;
   text-align: left;
 
   label, span, .input {
@@ -28,11 +32,19 @@ section {
   }
 }
 
+#empty-list {
+  @include vertical-center;
+}
+
 #offer-list {
   margin-top: 25px;
-
   .card img {
     float: left;
     margin-right: 8px;
   }
+}
+
+#back-button {
+  @include margin(10px 0 1em 20px);
+  display: block;
 }
