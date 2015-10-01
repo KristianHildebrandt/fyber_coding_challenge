@@ -9,6 +9,7 @@
     = stylesheet_link_tag :application, media: "all"
     = csrf_meta_tags
   %body{:class => body_class}
-    = render "flashes"
-    = yield
-    = render "javascript"
+    %section
+      = render "flashes"
+      = yield
+      = render "javascript"

@@ -5,4 +5,26 @@
 @import "base/grid-settings";
 @import "neat";
 @import "base/base";
-@import "refills/flashes";
+@import "refills/*";
+
+section {
+  @include outer-container;
+}
+
+h1, p {
+  text-align: center
+}
+
+.form-wrapper {
+  @include span-columns(4);
+  @include transform( translate(-50%,-50%) );
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  animation: bounceIn 2s;
+
+  label {
+    text-align: left;
+  }
+}

@@ -1,6 +1,12 @@
-= simple_form_for @form, url: list_path do |f|
-  = f.input :uid
-  = f.input :page
-  = f.input :pub0
+.form-wrapper
+  = simple_form_for @form, url: list_path do |f|
+    %h1 Fyber Coding Challenge
+    %p By Kristian Hildebrandt
 
-  = f.button :submit, 'Search Offers'
+    .flex-boxes
+      .flex-box.flex-box-big
+        = f.input :uid
+        = f.input :page
+        = f.input :pub0
+
+        = f.button :submit, 'Search Offers'
